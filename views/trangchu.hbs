@@ -1,0 +1,154 @@
+<div class="navbar navbar-inverse set-radius-zero">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/trangchu">
+
+                <img src="/images/ic_logo.png">
+            </a>
+
+        </div>
+
+        <div class="right-div">
+            <a href="/dangxuat" class="btn btn-info pull-right">Đăng xuất</a>
+        </div>
+    </div>
+</div>
+<!-- LOGO HEADER END-->
+<section class="menu-section">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="navbar-collapse collapse ">
+                    <ul id="menu-top" class="nav navbar-nav navbar-right">
+                        <li><a href="/users/nguoidung" class="menu-top-active">Tài khoản</a></li>
+                        <li><a href="/danhmuc">Danh mục</a></li>
+                        <li><a href="/danhsachsp">Sản phẩm</a></li>
+                        <li><a href="/api/order/lichsumuahang">Đơn hàng</a></li>
+                        <li><a href="/api/order/lichsumuahang">Thống kê</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- MENU SECTION END-->
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12">
+                <h4 class="header-line">IT T-Shirt Shop</h4>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-3 col-xs-2">
+                <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <div class="item">
+
+                            <img src="/images/1.jpg" alt="">
+
+                        </div>
+                        <div class="item">
+                            <img src="/images/2.jpg" alt="">
+
+                        </div>
+                        <div class="item active">
+                            <img src="/images/3.jpg" alt="">
+
+                        </div>
+                    </div>
+                    <!--INDICATORS-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example" data-slide-to="0" class=""></li>
+                        <li data-target="#carousel-example" data-slide-to="1" class=""></li>
+                        <li data-target="#carousel-example" data-slide-to="2" class="active"></li>
+                    </ol>
+                    <!--PREVIUS-NEXT BUTTONS-->
+                    <a class="left carousel-control" href="http://192.168.11.119:5500/index.html#carousel-example"
+                        data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="http://192.168.11.119:5500/index.html#carousel-example"
+                        data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="row">
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+<!-- CONTENT-WRAPPER SECTION END-->
+<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                &copy; 2022 IT T-shirt |
+                Designed by : Eagle Team</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+        (function () {
+            function refreshCSS() {
+                var sheets = [].slice.call(document.getElementsByTagName("link"));
+                var head = document.getElementsByTagName("head")[0];
+                for (var i = 0; i < sheets.length; ++i) {
+                    var elem = sheets[i];
+                    var parent = elem.parentElement || head;
+                    parent.removeChild(elem);
+                    var rel = elem.rel;
+                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                    }
+                    parent.appendChild(elem);
+                }
+            }
+            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+            var address = protocol + window.location.host + window.location.pathname + '/ws';
+            var socket = new WebSocket(address);
+            socket.onmessage = function (msg) {
+                if (msg.data == 'reload') window.location.reload();
+                else if (msg.data == 'refreshcss') refreshCSS();
+            };
+            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                console.log('Live reload enabled.');
+                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+            }
+        })();
+    }
+    else {
+        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+
+</script>

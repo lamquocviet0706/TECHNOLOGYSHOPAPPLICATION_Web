@@ -1,0 +1,115 @@
+<div class="navbar navbar-inverse set-radius-zero">
+    <section class="menu-section" style="background-color: #f6f6f6">
+        <div class="container" style="display:inline-block;text-align:center;">
+            <div class="row " style="float: left;">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right"
+                            style="font-size: 15px; font-weight:bold;word: spacing 10px;">
+                            <li><a  href="/danhsachsp" class="menu-top-active">Trang chủ</a></li>
+                            <li><a href="/api/order/thongke">Thống Kê</a></li>
+                            <li><a href="/danhsachsp"> Sản Phẩm</a></li>
+                             <li><a href="/danhmuc"> Loại Thiết Bị</a></li>
+                            <li><a href="/api/order/lichsumuahang"> Đơn Hàng</a></li>
+                            <li><a href="/users/nguoidung">Quản lí Người Dùng</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="/dangxuat">Đăng Xuất</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+<div class="content-wrapper">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 col-sm12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Sửa sản phẩm
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="post" action="/danhsachsp/{{product._id}}/edit"
+                            enctype="multipart/form-data">
+                            <div class="form-group ">
+                                <label class="control-label" for="name">Tên sản phẩm</label>
+                                <input type="text" class="form-control" value="{{product.name}}" id="name"
+                                    name="name" />
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label" for="price">Giá</label>
+                                <input type="number" class="form-control" value="{{product.price}}" id="price"
+                                    name="price" />
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label" for="name">Danh mục</label>
+                                <input type="text" class="form-control" value="{{product.category}}" id="category"
+                                    name="category" />
+                            </div>
+                            <div class="form-group ">
+                                <img id="img-view" width="170" height="170" src="{{product.image}}" />
+
+                                <input type="file" onchange="onChangeFile()" class="form-control-file border"
+                                    id="img-file" name="image" />
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label" for="description">Mô tả</label>
+                                <textarea type="text" rows="3" class="form-control" id="description" name="description">
+                                        {{product.description}}
+                                    </textarea>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="control-label" for="published">Ngày</label>
+                                <input value="{{formatDate product.published 0}}" type="date" class="form-control"
+                                    id="published" name="published" />
+                            </div>
+                            <div class="form-group checkbox">
+                                <label class="control-label" for="available">
+                                    {{#if product.available}}
+                                    <input type="checkbox" checked value="{{product.available}}" id="available"
+                                        name="available" />
+                                    {{else}}
+                                    <input type="checkbox" value="{{product.available}}" id="available"
+                                        name="available" />
+                                    {{/if}}
+                                    Available
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <button onclick="onClose()" type="button" class="btn btn-default">Đóng</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    const onClose = () => {
+        window.location.href = '/danhsachsp'
+    }
+    const onChangeFile = () => {
+        const file = document.getElementById('img-file').files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById('img-view').src = e.target.result;
+            document.getElementById('img-view').classList.remove('display-none');
+
+        }
+        reader.readAsDataURL(file);
+    }
+
+
+</script>

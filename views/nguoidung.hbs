@@ -1,0 +1,124 @@
+<body style="background-image:url(assets/img/OIP.jpg); background-position:center;">
+  <section class="menu-section" style="background-color: #f6f6f6">
+    <div class="container" style="display:inline-block;text-align:center;">
+      <div class="row " style="float: left;">
+        <div class="col-md-12">
+          <div class="navbar-collapse collapse ">
+            <ul id="menu-top" class="nav navbar-nav navbar-right"
+              style="font-size: 15px; font-weight:bold;word: spacing 10px;">
+              <li><a  href="/danhsachsp" class="menu-top-active">Trang chủ</a></li>
+              <li><a href="/api/order/thongke">Thống Kê</a></li>
+              <li><a href="/danhsachsp"> Sản Phẩm</a></li>
+               <li><a href="/danhmuc"> Loại Thiết Bị</a></li>
+              <li><a href="/api/order/lichsumuahang"> Đơn Hàng</a></li>
+              <li><a href="/users/nguoidung">Quản lí Người Dùng</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <li><a class="logout" href="/dangxuat">Đăng Xuất</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- LOGO HEADER END-->
+  <!-- MENU SECTION END-->
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="row pad-botm">
+      </div>
+      <div class="row">
+        <div class="col-md-15">
+          <!--    Hover Rows  -->
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-advance table-hover" class="table table-hover">
+                <h4> QUẢN LÝ NGƯỜI DÙNG </h4>
+                <div class="right" style="float: right;">
+                  <label>Tìm kiếm người dùng: </label>
+                  <input type="text" class="field small-field" />
+                  <input type="submit" class="button" value="search" />
+                </div>
+            </div>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên</th>
+                <th>Vai Trò</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each users}}
+              <tr>
+                <td>{{sothutu @index}}</td>
+
+                <td>{{this.username}}</td>
+                <td>{{this.role}}</td>
+                <td>
+                  <button class="btn btn-primary" onclick="goEdit('{{this._id}}')">
+                    <i class="fa fa-user"></i>
+                    Đổi vai trò
+                  </button>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+            </table>
+            <div class="pagging">
+              <div class="left">Showing 1-12 of 44</div>
+              <div class="right" style="background-color: #FFFFFF;color:#428BCA;font:14px;padding:6px 12px"> <a
+                  href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+                <a href="#">4</a> <a href="#">245</a> <span>...</span> <a href="#">Next</a> <a href="#">View all</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+    </div>
+  </div>
+  <!-- CONTENT-WRAPPER SECTION END-->
+  </div>
+  <section id="main-content">
+    </div>
+  </section>
+  <script>
+    let delete_id;
+    const goEdit = (id) => {
+      console.log("edit", id);
+      const url = `http://localhost:3000/users/switch-role/${id}`;
+      const option = {
+        method: 'post',
+        headers: { "Content-Type": "application/json" }
+      }
+      try {
+
+        fetchAPI(url, option);
+        window.location.href = "/users/nguoidung";
+      } catch (e) {
+        console.log("Delete Error: ", e);
+      }
+    }
+    const goDelete = (id) => { delete_id = id }
+    const fetchAPI = async (url, option) => {
+      const res = await fetch(url, option);
+      return res.json;
+    }
+    const onDelete = async () => {
+      const url = `http://localhost:3000/users/nguoidung/${delete_id}`;
+      const option = {
+        method: 'delete',
+        headers: { "Content-Type": "application/json" }
+      }
+      try {
+        await
+          fetchAPI(url, option); window.location.href = "/users/nguoidung";
+      } catch (e) {
+        console.log("Delete Error: ", e);
+      }
+    }
+  </script>
+</body>

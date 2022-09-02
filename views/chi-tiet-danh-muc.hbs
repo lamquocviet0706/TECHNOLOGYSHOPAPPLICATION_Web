@@ -1,0 +1,99 @@
+<body style="background-image:url(images/copy.jpg); background-position:center;">
+  <div class="navbar navbar-inverse set-radius-zero">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+      </div>
+
+
+    </div>
+  </div>
+  <!-- LOGO HEADER END-->
+  <section class="menu-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- MENU SECTION END-->
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="row pad-botm">
+        <div class="col-md-12">
+          <h4 class="header-line">Chỉnh sửa Loại Sản Phẩm</h4>
+        </div>
+      </div>
+
+      <div class="panel-formdetail">
+        <div class="panel panel-info">
+
+          <div class="panel-body">
+            <form role="form" method="post" action="/danhmuc/{{category._id}}/edit">
+              {{!-- <div class="form-group">
+                <label>ID</label>
+                <input class="form-control" type="text" />
+
+              </div> --}}
+              <div class="form-group">
+                <label>Tên loại sản phẩm</label>
+                <input class="form-control" type="text" name="name" value="{{category.name}}" />
+
+              </div>
+
+              <div class="form-group">
+
+              </div>
+              <div class="form-group modal-footer">
+                <button type="submit" class="btn btn-info">
+                  Lưu
+                </button>
+                <button type="button" onclick="{onClose()}" class="btn btn-infocancel">
+                  Đóng
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+
+        <!--/.ROW-->
+
+      </div>
+    </div>
+    <!-- CONTENT-WRAPPER SECTION END-->
+    <section class="footer-section">
+      <div class="container">
+        <div class="row">
+          {{!-- <div class="col-md-12">
+            &copy; 2014 Yourdomain.com |<a href="http://www.binarytheme.com/" target="_blank">
+              Designed by : binarytheme.com</a>
+          </div> --}}
+        </div>
+      </div>
+    </section>
+    <script>
+      const onClose = () => {
+        window.location.href = "/danhmuc"
+      }
+
+      const onChangeFile = () => {
+        const file = document.getElementById('img-file').files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+          document.getElementById('img-view').src = e.target.result;
+
+        }
+        reader.readAsDataURL(file);
+
+      }
+    </script>
+</body>

@@ -1,0 +1,339 @@
+<body style="background-image:url(assets/img/OIP.jpg); background-position:center;">
+    <section class="menu-section" style="background-color: #f6f6f6">
+        <div class="container" style="display:inline-block;text-align:center;">
+            <div class="row " style="float: left;">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right"
+                            style="font-size: 15px; font-weight:bold;word: spacing 10px;">
+                            <li><a href="/danhsachsp" class="menu-top-active">Trang chủ</a></li>
+
+                            <li><a href="/api/order/thongke">Thống Kê</a></li>
+                            <li><a href="/danhsachsp"> Sản Phẩm</a></li>
+                            <li><a href="/danhmuc"> Loại Thiết Bị</a></li>
+                            <li><a href="/api/order/lichsumuahang"> Đơn Hàng</a></li>
+                            <li><a href="/users/nguoidung">Quản lí Người Dùng</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="/dangxuat">Đăng Xuất</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- LOGO HEADER END-->
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row pad-botm">
+                <div class="col-md-12">
+                </div>
+                <div class="row">
+                    {{!-- <div class="col-md-12">
+                    </div> --}}
+                    <div class="panel panel-default">
+                        <div class="content-header">
+                            <div class="left-div">
+
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">Thêm sản phẩm</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="panel-body">
+                                                    <form role="form">
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="name">Tên sản phẩm</label>
+                                                            <input type="text" class="form-control" id="name"
+                                                                onchange="validationForm()" name="name" />
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="price">Giá</label>
+                                                            <input type="number" class="form-control" id="price"
+                                                                onchange="validationForm()" name="price" />
+                                                        </div>
+
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="category">Loại Thiết
+                                                                Bị</label>
+                                                            <input type="text" class="form-control" id="category"
+                                                                name="category" onchange="validationForm()" />
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <img id="img-view" class="display-none img-cover"
+                                                                width="170" height="170" src="" />
+                                                            <input onchange="validationForm()" type="hidden"
+                                                                name="image" id="image" />
+                                                            <input type="file" onchange="onChangeFile()"
+                                                                class="form-control-file border" id="img-file" />
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="description">Mô tả</label>
+                                                            <textarea type="text" rows="3" class="form-control"
+                                                                id="description" name="description">
+
+                                        </textarea>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="published">Ngày
+                                                                tạo</label>
+                                                            <input onchange="validationForm()" type="date"
+                                                                class="form-control" id="published" name="published" />
+                                                        </div>
+                                                        <div class="form-group checkbox">
+                                                            <label class="control-label" for="available">
+
+                                                                <input type="checkbox" value="{{product.available}}"
+                                                                    id="available" name="available" />
+
+                                                                Available
+                                                            </label>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Đóng</button>
+                                                            <button disabled id="buttonSave" onclick="onSave()"
+                                                                type="button" class="btn btn-primary">Thêm</button>
+                                                            <h2 id="error-msg"></h2>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-advance table-hover" class="table table-hover">
+                                    <h4> QUẢN LÝ SẢN PHẨM </h4>
+                                    <div class="pagging">
+                                        <button class="btn btn-primary btn-lg btn btn-success" data-toggle="modal"
+                                            data-target="#myModal">
+                                            Thêm sản phẩm
+                                        </button>
+
+                                        <div class="right" style="float: right;">
+                                            <label>Tìm kiếm sản phẩm: </label>
+                                            <input type="text" class="field small-field" />
+                                            <input type="submit" class="button" value="search" />
+                                        </div>
+                                    </div>
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+
+                                            <th>Tên</th>
+                                            <th>Giá</th>
+                                            <th>Danh mục</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Mô tả</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each products}}
+                                        <tr>
+                                            <td>{{sothutu @index}}</td>
+
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.price}} $</td>
+                                            <td>{{this.category}} </td>
+                                            <td><img src="{{this.image}}" width="70" height="70" />
+                                            </td>
+                                            <td>{{this.description}}</td>
+                                            <td>{{this.available}}</td>
+
+                                            <td>
+
+                                                <a href="/danhsachsp/{{this._id}}/edit"><button
+                                                        class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>
+                                                        Sửa</button></a>
+                                                <button onclick="goDelete('{{this._id}}')" class="btn btn-danger btn-xs"
+                                                    data-target="#DeleteModal" data-toggle="modal"><i
+                                                        class="fa fa-trash-o "></i> Xóa</button>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                                <div class="pagging">
+                                    <div class="left">Showing 1-12 of 44</div>
+                                    <div class="right"
+                                        style="background-color: #FFFFFF;color:#428BCA;font:14px;padding:6px 12px"> <a
+                                            href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+                                        <a href="#">4</a> <a href="#">245</a> <span>...</span> <a href="#">Next</a> <a
+                                            href="#">View all</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Bạn có muốn xóa sản phẩm</h4>
+                            </div>
+
+                            <div class="modal-footer">
+                                <div class="panel-body">
+
+
+
+                                    <button onclick="onClose()" type="button" class="btn btn-default"
+                                        data-dismiss="modal">Không</button>
+                                    <button type="button" onclick="onDelete()" class="btn btn-primary">Có</button>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <script>
+                    let delete_id;
+
+                    const goDelete = (id) => {
+                        delete_id = id;
+                    }
+                    const fetchAPI = async (url, option) => {
+                        const res = await fetch(url, option);
+                        return res.json();
+
+                    }
+                    const onDelete = async () => {
+                        const url = `http://localhost:3000/danhsachsp/${delete_id}`;
+                        const option = {
+                            method: 'delete',
+                            headers: { 'Content-Type': 'application/json' }
+                        }
+                        try {
+                            await fetchAPI(url, option);
+                            window.location.href = '/danhsachsp';
+                        } catch (e) { console.log('Delete error: ', e) }
+                    }
+
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyB_mDA_pzcyBlAl7etMKEfWD8oQSPSSlW4",
+                        authDomain: "lab6-302803.firebaseapp.com",
+                        projectId: "lab6-302803",
+                        storageBucket: "lab6-302803.appspot.com",
+                        messagingSenderId: "343976349202",
+                        appId: "1:343976349202:web:bb8c8e88576ad9412a12cb",
+                        measurementId: "G-RG4Z8Z9YK5"
+                    };
+                    firebase.initializeApp(firebaseConfig);
+
+                    const onEdit = (id, name, price) => {
+                        document.getElementById('name').value = name;
+                    }
+                    const onChangeFile = () => {
+                        const file = document.getElementById('img-file').files[0];
+                        const reader = new FileReader();
+                        reader.onload = e => {
+                            document.getElementById('img-view').src = e.target.result;
+                            document.getElementById('img-view').classList.remove('display-none');
+
+                        }
+                        reader.readAsDataURL(file);
+
+                        //upload
+                        const ref = firebase.storage().ref(uuid());
+                        const uploadTask = ref.put(file);
+                        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                            (snapshot) => { },
+                            (erorr) => { console.log('firebase: ', erorr) },
+                            () => {
+                                uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                                    document.getElementById('image').value = url;
+                                    console.log(url);
+                                })
+                            }
+                        )
+
+                    }
+
+                    const uuid = () => {
+                        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                            return v.toString(16);
+                        });
+
+
+                    }
+
+                    const validationForm = () => {
+                        const name = document.getElementById('name').value;
+                        const price = document.getElementById('price').value;
+                        const image = document.getElementById('image').value;
+                        const published = document.getElementById('published').value;
+                        if (!name || !price || !image || !published
+                            || name.trim().length == 0
+                            || price.trim().length == 0
+                            || price < 0
+                            || price > 100000000
+                            || new Date(published).getTime() > new Date().getTime()) {
+                            document.getElementById('buttonSave').disabled = true;
+                        } else {
+                            document.getElementById('buttonSave').disabled = false;
+                        }
+                    }
+
+                    const onSave = async () => {
+                        const url = `http://localhost:3000/danhsachsp/`;
+                        const name = document.getElementById('name').value;
+                        const price = document.getElementById('price').value;
+                        const image = document.getElementById('image').value;
+                        const published = document.getElementById('published').value;
+                        const description = document.getElementById('description').value;
+                        const available = document.getElementById('available').value;
+                        const category = document.getElementById('category').value;
+                        const body = {
+                            name, price, image, published, description, available, category,
+                        }
+                        const option = {
+                            method: 'post',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body)
+                        }
+                        try {
+                            const result = await fetchAPI(url, option);
+                            if (result.status) {
+                                window.location.href = '/danhsachsp';
+                            } else {
+                                console.log(result);
+                                if (result.erorrs.length > 0) {
+                                    const msg = result.erorrs[0].msg;
+                                    document.getElementById('error-msg').innerText = msg;
+                                }
+                            }
+                        } catch (e) { console.log('Delete error: ', e) }
+                    }
+                </script>
+            </div>
+            <section id="main-content">
+
+        </div>
+        </section>
+</body>

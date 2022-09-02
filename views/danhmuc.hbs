@@ -1,0 +1,172 @@
+<body style="background-image:url(assets/img/OIP.jpg); background-position:center;">
+  <section class="menu-section" style="background-color: #f6f6f6">
+    <div class="container" style="display:inline-block;text-align:center;">
+      <div class="row " style="float: left;">
+        <div class="col-md-12">
+          <div class="navbar-collapse collapse ">
+            <ul id="menu-top" class="nav navbar-nav navbar-right"
+              style="font-size: 15px; font-weight:bold;word: spacing 10px;">
+              <li><a href="/danhsachsp" class="menu-top-active">Trang chủ</a></li>
+
+              <li><a href="/api/order/thongke">Thống Kê</a></li>
+              <li><a href="/danhsachsp"> Sản Phẩm</a></li>
+              <li><a href="/danhmuc"> Loại Thiết Bị</a></li>
+              <li><a href="/api/order/lichsumuahang"> Đơn Hàng</a></li>
+              <li><a href="/users/nguoidung">Quản lí Người Dùng</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <li><a class="logout" href="/dangxuat">Đăng Xuất</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- LOGO HEADER END-->
+  <!-- MENU SECTION END-->
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="row pad-botm">
+        <div class="col-md-12">
+        </div>
+        <div class="row">
+          {{!-- <div class="col-md-12">
+          </div> --}}
+          <div class="panel panel-default">
+            <div class="content-header">
+              <div class="left-div">
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Thêm Loại Sản Phẩm</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="panel-body">
+                          <form role="form" method="post" action="/danhmuc">
+
+                            <div class="form-group">
+                              <label>Tên Loại Sản Phẩm</label>
+                              <input class="form-control" type="text" name="name" />
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Đóng
+                              </button>
+                              <button type="submit" class="btn btn-primary">
+                                Lưu
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-striped table-advance table-hover" class="table table-hover">
+                    <h4> QUẢN LÝ LOẠI SẢN PHẨM </h4>
+                    <div class="pagging">
+                      <button class="btn btn-primary btn-lg btn btn-success" data-toggle="modal" data-target="#myModal">
+                        Thêm Loại Sản Phẩm
+                      </button>
+
+                      <div class="right" style="float: right;">
+                        <label>Tìm kiếm sản phẩm: </label>
+                        <input type="text" class="field small-field" />
+                        <input type="submit" class="button" value="search" />
+                      </div>
+                    </div>
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tên</th>               
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each categories}}
+                      <tr>
+                        <td>{{sothutu @index}}</td>
+
+                        <td>{{this.name}}</td>
+    
+
+                        <td>
+
+                          <button onclick="goEdit('{{this._id}}')" class="btn btn-primary btn-xs"><i
+                                class="fa fa-pencil"></i>
+                              Sửa</button>
+                          <button onclick="goDelete('{{this._id}}')" class="btn btn-danger btn-xs"
+                            data-target="#myModalDelete" data-toggle="modal"><i class="fa fa-trash-o "></i> Xóa</button>
+                        </td>
+                      </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                  <div class="pagging">
+                    <div class="left">Showing 1-12 of 44</div>
+                    <div class="right" style="background-color: #FFFFFF;color:#428BCA;font:14px;padding:6px 12px"> <a
+                        href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+                      <a href="#">4</a> <a href="#">245</a> <span>...</span> <a href="#">Next</a> <a href="#">View
+                        all</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" style="display: none">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">
+                    Bạn muốn xóa danh mục này?
+                  </h4>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Không
+                  </button>
+                  <button type="submit" onclick="onDelete()" class="btn btn-primary">Có</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+    let delete_id;
+    const goEdit = (id) => { window.location.href = `/danhmuc/${id}/edit` }
+    const goDelete = (id) => { delete_id = id }
+    const fetchAPI = async (url, option) => {
+      const res = await fetch(url, option);
+      return res.json;
+    }
+    const onDelete = async () => {
+      const url = `http://localhost:3000/danhmuc/${delete_id}`;
+      const option = {
+        method: 'delete',
+        headers: { "Content-Type": "application/json" }
+      }
+      try {
+        await
+          fetchAPI(url, option); window.location.href = "/danhmuc";
+      } catch (e) {
+        console.log("Delete Error: ", e);
+      }
+    }
+  </script>
+</body>
